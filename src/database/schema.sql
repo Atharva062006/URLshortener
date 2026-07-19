@@ -1,7 +1,12 @@
-CREATE TABLE urls (
-    urlId,
-    shortURL,
-    longURL,
-    clickCount,
-    createdAt,
-)
+CREATE TABLE IF NOT EXISTS urls (
+    id BIGSERIAL PRIMARY KEY,
+
+    short_code VARCHAR(10) NOT NULL UNIQUE,
+
+    long_url TEXT NOT NULL,
+
+    click_count INTEGER NOT NULL DEFAULT 0
+        CHECK (click_count >= 0),
+
+    created_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP
+);
