@@ -5,7 +5,12 @@ import {
 import { handleResponse } from "../utils/handleResponse.js";
 
 export const shortenUrl = async (req, res) => {
-    const url = req.body;
+    const {url} = req.body;
+
+    if(!url) {
+        handleResponse(res, 400, "URL is required", null);
+        return;
+    }
 
     try {
         const result = await shortenUrlService(url);

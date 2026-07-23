@@ -1,6 +1,6 @@
 import pool from "../database/pool.js";
 
-export const createUrl = async (url, shortUrl) => {
-    const result = await pool.query("INSERT INTO urls (url, short_url) VALUES ($1, $2)", [url, shortUrl]);
+export const createUrl = async (url, shortCode) => {
+    const result = await pool.query("INSERT INTO urls (long_url, short_code) VALUES ($1, $2) RETURNING *", [url, shortCode]);
     return result.rows[0];
 }
